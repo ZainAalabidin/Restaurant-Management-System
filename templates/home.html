@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Home - Yummy Restaurant{% endblock %}
+{% block content %}
+<style>
+    .home-background {
+        background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
+        background-size: cover;
+        background-position: center;
+        height: 100vh; /* Adjust height based on your design */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .jumbotron {
+        background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+        padding: 30px;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="home-background">
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome to Yummy Restaurant!</h1>
+        <p class="lead">Enjoy delicious meals with us.</p>
+        <hr class="my-4">
+        <p>Explore our menu and place your order.</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('menu') }}" role="button">View Menu</a>
+        <a class="btn btn-success btn-lg" href="{{ url_for('create_order') }}" role="button">Place Order</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+<!-- categories.html -->
+{% extends "base.html" %}
+{% block title %}Categories - Yummy Restaurant{% endblock %}
+{% block content %}
+<div class="categories-container">
+    <h1>Manage Categories</h1>
+    <div class="categories">
+        <ul>
+            {% for category in categories %}
+                <li>
+                    {{ category.name }}
+                    <form action="{{ url_for('delete_category', category_id=category.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category? All associated menu items will also be deleted.');">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

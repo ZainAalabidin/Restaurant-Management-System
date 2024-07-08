@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Menu - Yummy Restaurant{% endblock %}
+{% block content %}
+<div class="add-new-item text-left">
+    <a href="{{ url_for('new_menu_item') }}" class="btn btn-primary">Add New Item</a>
+    <a href="{{ url_for('main.add_category') }}" class="btn btn-primary">Add New Category</a>
+    <div class="categories-container">
+        <h1>Manage Categories</h1>
+        <div class="categories">
+            <ul>
+                {% for category in categories %}
+                    <li>
+                        {{ category.name }}
+                        <form action="{{ url_for('delete_category', category_id=category.id) }}" method="POST" style="display:inline; margin-top: 50px;">
+                            
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category? All associated menu items will also be deleted.');">Delete</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+<br>
+<div class="menu-container">
+    <h1>Our Menu</h1>
+    <!-- Category Filter Form -->
+    <div class="category-filter">
+        <form method="GET" action="{{ url_for('menu') }}">
+            <label for="category">Filter by Category:</label>
+            <select class="form-select" name="category_id" id="category" onchange="this.form.submit()">
+                <option value="">All Categories</option>
+                {% for category in categories %}
+                        <option value="{{ category.id }}" {% if category.id == selected_category_id %}selected{% endif %}>{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </form>
+    </div>
+    <div class="menu-items">
+        {% for item in menu_items %}
+            <div class="card-body">
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{ url_for('static', filename='images/' + item.image) }}" class="card-img" alt="{{ item.name }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.name }}</h5>
+                            <p class="card-text">{{ item.description }}</p>
+                            <p class="card-text">${{ item.price }}</p>
+                            <div class="btn-group">
+                                <form action="{{ url_for('update_menu_item', item_id=item.id) }}" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                                </form>
+                                <form action="{{ url_for('delete_menu_item', item_id=item.id) }}" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    
+</div>
+{% endblock %}

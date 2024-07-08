@@ -1,0 +1,26 @@
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h4>Contact Us</h4>
+                <p>123 Restaurant Street</p>
+                <p>City, State ZIP</p>
+                <p>Phone: +1 (123) 456-7890</p>
+            </div>
+            <div class="col-md-6">
+                <h4>Follow Us</h4>
+                <p>
+                    <a href="#" class="social-link">Facebook</a> |
+                    <a href="#" class="social-link">Twitter</a> |
+                    <a href="#" class="social-link">Instagram</a>
+                </p>
+            </div>
+        </div>
+        <hr>
+        <p class="text-center">&copy; <span id="currentYear"></span> Yummy Restaurant. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>

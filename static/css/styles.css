@@ -1,0 +1,185 @@
+/* home page style */
+.home-background {
+  background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
+  background-size: cover;
+  background-position: center;
+  height: 100vh; /* Adjust height based on your design */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.jumbotron {
+  background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+  padding: 30px;
+  border-radius: 10px;
+}
+/* end of home page style */
+
+.menu-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.category-filter {
+  margin-bottom: 20px;
+}
+
+.category-filter form {
+  display: flex;
+  align-items: center;
+}
+
+.category-filter label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.category-filter select {
+  padding: 5px;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.menu-item {
+  display: auto;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #f8f9fa;
+  transition: transform 0.3s ease;
+}
+
+
+.card-body:hover {
+  transform: scale(1.02);
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.card-text {
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+.btn-group {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 0.8em;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.add-new-item {
+  margin-top: 20px;
+}
+
+.footer {
+  background-color: #343a40;
+  color: #ffffff;
+  padding: 30px 0;
+}
+
+.footer h4 {
+  color: #f8f9fa;
+}
+
+.footer p {
+  color: #ced4da;
+}
+
+.footer a {
+  color: #f8f9fa;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #f8f9fa;
+  text-decoration: underline;
+}
+
+.social-link {
+  margin-right: 10px;
+}
+
+.navbar {
+  background-color: #ffffff; /* Set your desired background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+}
+
+.navbar-brand {
+  font-weight: bold; /* Make the brand name bold */
+  color: #333333; /* Adjust the brand name color */
+}
+
+.navbar-nav .nav-link {
+  color: #333333; /* Set link color */
+  font-weight: bold; /* Make links bold */
+}
+
+.navbar-nav .nav-link:hover {
+  color: #007bff; /* Change link color on hover */
+}
+
+.navbar-toggler-icon {
+  background-color: #333333; /* Set toggler icon color */
+}
+
+.navbar-light .navbar-toggler {
+  border-color: rgba(0, 0, 0, 0.1); /* Adjust toggler border color */
+}
+
+.no-gutters {
+  border-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
