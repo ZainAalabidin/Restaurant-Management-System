@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block title %}View Cart{% endblock %} {% block
+content %}
+<h2>Cart Items</h2>
+<div class="row">
+    <div class="col-md-8">
+        <ul class="list-group">
+            {% for item in cart %}
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h5>{{ item.name }}</h5>
+                        <p>Price: ${{ item.price }}</p>
+                        <form action="{{ url_for('cart.update_cart', item_id=item.id) }}" method="POST">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" id="quantity" min="1" max="10" class="quantity-input" data-price="{{ item.price }}" value="{{ item.quantity }}" required />
+                        </form>
+                    </div>
+                    <div>
+                        <form action="{{ url_for('cart.remove_from_cart', item_id=item.id) }}" method="POST">
+                            <button type="submit" class="btn btn-danger btn-sm">
+                                Remove
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+            <br>
+            <nav>
+                <p>Total Price: <span id="total-price">$ 0.00</span></p>
+            </nav>
+           
+                <!-- <p>Total Price: <span id="total-price">$ 0.00</span></p> -->
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">Order CheckOut</h3>
+                <form action="{{ url_for('cart.view_cart') }}" method="POST">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.email.label(class="form-label") }} {{
+                        form.email(class="form-control") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.table_number.label(class="form-label") }} {{
+                        form.table_number(class="form-control") }}
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Place Order</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <li class="navbar-brand">
+        <a class="nav-link" href="{{ url_for('menu.menu') }}">Go back to menu</a>
+        <a class="nav-link" href="{{ url_for('menu.menu') }}">Show order details</a>
+    </li>
+</div>
+
+{% endblock %}

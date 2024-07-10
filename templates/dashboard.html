@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Admin Dashboard</h1>
+  
+
+  <!-- Manage Orders Section -->
+  <section>
+    <button type="button" class="btn btn-primary">Manage Orders</button>
+    <table class="table table-striped">
+      <!-- Orders table content -->
+      <h2>Orders</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>User</th>
+            <th>Table Number</th>
+            <th>Items</th>
+            <th>Total Price</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in orders %}
+            <tr>
+              <td>{{ order.id }}</td>
+              <td>{{ order.user.username }}</td>
+              <td>{{ order.table_number }}</td>
+              <td>
+                <ul>
+                  {% for item in order.order_items %}
+                    <li>{{ item.menu_item.name }} ({{ item.quantity }})</li>
+                  {% endfor %}
+                </ul>
+              </td>
+              <td>{{ order.total_price }}</td>
+              <td>{{ order.status }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </table>
+  </section>
+  <!-- Orders Section -->
+   
+  <section>
+    
+  </section>
+  
+  <!-- Menu Items Section -->
+  <section>
+    <h2>Menu Items</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in menu_items %}
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ item.category.name }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+  
+  <!-- Categories Section -->
+  <section>
+    <h2>Categories</h2>
+    <ul>
+      {% for category in categories %}
+        <li>{{ category.name }}</li>
+        <button type="submit" class="btn-danger">Delete</button>
+      {% endfor %}
+    </ul>
+  </section>
+
+{% endblock %}

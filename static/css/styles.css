@@ -183,3 +183,14 @@
 
 }
 
+.cart-count {
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+

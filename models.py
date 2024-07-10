@@ -14,6 +14,14 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f'User {self.username} with role {self.role}'
+    
+    def set_as_admin(self):
+        self.role = 'admin'
+        db.session.commit()
+
+    @property
+    def is_admin(self):
+        return self.role == 'admin'
 
 
 class Order(db.Model):

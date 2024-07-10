@@ -2,8 +2,8 @@
 {% block title %}Menu - Yummy Restaurant{% endblock %}
 {% block content %}
 <div class="add-new-item text-left">
-    <a href="{{ url_for('new_menu_item') }}" class="btn btn-primary">Add New Item</a>
-    <a href="{{ url_for('main.add_category') }}" class="btn btn-primary">Add New Category</a>
+    <a href="{{ url_for('menu.new_menu_item') }}" class="btn btn-primary">Add New Item</a>
+    <a href="{{ url_for('category.add_category') }}" class="btn btn-primary">Add New Category</a>
     <div class="categories-container">
         <h1>Manage Categories</h1>
         <div class="categories">
@@ -11,7 +11,7 @@
                 {% for category in categories %}
                     <li>
                         {{ category.name }}
-                        <form action="{{ url_for('delete_category', category_id=category.id) }}" method="POST" style="display:inline; margin-top: 50px;">
+                        <form action="{{ url_for('category.delete_category', category_id=category.id) }}" method="POST" style="display:inline; margin-top: 50px;">
                             
                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category? All associated menu items will also be deleted.');">Delete</button>
                         </form>
@@ -26,7 +26,7 @@
     <h1>Our Menu</h1>
     <!-- Category Filter Form -->
     <div class="category-filter">
-        <form method="GET" action="{{ url_for('menu') }}">
+        <form method="GET" action="{{ url_for('menu.menu') }}">
             <label for="category">Filter by Category:</label>
             <select class="form-select" name="category_id" id="category" onchange="this.form.submit()">
                 <option value="">All Categories</option>
@@ -48,11 +48,12 @@
                             <h5 class="card-title">{{ item.name }}</h5>
                             <p class="card-text">{{ item.description }}</p>
                             <p class="card-text">${{ item.price }}</p>
+                            <a href="{{ url_for('cart.add_to_cart', item_id=item.id) }}" class="cart-icon">Add to Cart</a>
                             <div class="btn-group">
-                                <form action="{{ url_for('update_menu_item', item_id=item.id) }}" method="post" style="display:inline;">
+                                <form action="{{ url_for('menu.update_menu_item', item_id=item.id) }}" method="post" style="display:inline;">
                                     <button type="submit" class="btn btn-primary btn-sm">Update</button>
                                 </form>
-                                <form action="{{ url_for('delete_menu_item', item_id=item.id) }}" method="post" style="display:inline;">
+                                <form id="del" action="{{ url_for('menu.delete_menu_item', item_id=item.id) }}" method="post" style="display:inline;">
                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');">Delete</button>
                                 </form>
                             </div>
