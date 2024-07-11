@@ -29,6 +29,8 @@
             <p>Total Price: {{ order['total_price'] }}</p>
             
         </table>
+        {% if current_user.is_admin %}
         <a href="{{ url_for('order.orders') }}">Back to Orders</a>
+        {% endif %}
     </div>
 {% endblock %}

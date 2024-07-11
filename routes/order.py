@@ -1,16 +1,17 @@
 #order.py
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, redirect,url_for, flash, request
 from models import User, Order, OrderItem, MenuItem
 from extensions import db
+from flask_login import current_user, login_required
+from models import User
 
 order_bp = Blueprint('order', __name__)
 
 @order_bp.route('/order_details/<int:order_id>', methods=['GET'])
 def order_details(order_id):
-    # Fetch the order with its associated user and order items
     order_with_details = (
         db.session.query(Order, User, OrderItem, MenuItem)
-        .join(User, Order.email == User.email)
+        .join(User, Order.user_id == User.id)
         .join(OrderItem, Order.id == OrderItem.order_id)
         .join(MenuItem, OrderItem.menu_item_id == MenuItem.id)
         .filter(Order.id == order_id)
@@ -44,10 +45,13 @@ def order_details(order_id):
 
 @order_bp.route('/orders', methods=['GET'])
 def orders():
-    # Fetch all orders with their associated user and order items
+    if not current_user.is_admin:
+        flash('You are not authorized to access the admin dashboard.', 'warning')
+        return redirect(url_for('home.home'))
+    
     orders_with_details = (
         db.session.query(Order, User, OrderItem, MenuItem)
-        .join(User, Order.email == User.email)
+        .join(User, Order.user_id == User.id)
         .join(OrderItem, Order.id == OrderItem.order_id)
         .join(MenuItem, OrderItem.menu_item_id == MenuItem.id)
         .all()
@@ -62,7 +66,7 @@ def orders():
                 'order_created_at': order.created_at,
                 'table_number': order.table_number,
                 'items': [],
-                'total_price': 0
+                'total_price': 0.0
             }
         item_detail = {
             'menu_item_name': menu_item.name,
@@ -76,3 +80,16 @@ def orders():
 
     orders_list = list(orders_dict.values())
     return render_template('orders.html', orders=orders_list)
+
+@order_bp.route('/update_order_status/<int:order_id>', methods=['POST', 'GET'])
+@login_required
+def update_order_status(order_id):
+    if not current_user.is_admin:
+        return redirect(url_for('home.home'))
+
+    status = request.form.get('status')
+    order = Order.query.get_or_404(order_id)
+    order.status = status
+    db.session.commit()
+    flash('Order status updated successfully.', 'success')
+    return redirect(url_for('order.orders'))

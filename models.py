@@ -1,7 +1,7 @@
 from extensions import db
 from datetime import datetime
 from flask_login import UserMixin
-
+from extensions import bcrypt
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -22,15 +22,22 @@ class User(db.Model, UserMixin):
     @property
     def is_admin(self):
         return self.role == 'admin'
+    
+    def set_password(self, password):
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+    
+    def check_password(self, password):
+        return bcrypt.check_password_hash(self.password, password)
 
 
 class Order(db.Model):
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(50), db.ForeignKey('users.email'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     table_number = db.Column(db.Integer, nullable=False)
     order_items = db.relationship('OrderItem', backref='order', lazy=True)
+    status = db.Column(db.String(50), nullable=False, default='Pending')
 
     def __repr__(self):
         return f'Order for table number {self.table_number}'

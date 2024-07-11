@@ -33,12 +33,12 @@ def view_cart():
     total_price = sum(item['price'] * item['quantity'] for item in cart)
 
     if form.validate_on_submit():
-        email = form.email.data
+        user_id = form.user_id.data
         table_number = form.table_number.data
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(id=user_id).first()
 
         if user:
-            new_order = Order(email=email, table_number=table_number)
+            new_order = Order(user_id=user_id, table_number=table_number)
             db.session.add(new_order)
             db.session.commit()
 

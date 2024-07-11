@@ -22,15 +22,20 @@
                         <a class="nav-link" href="{{ url_for('home.home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('admin.admin_dashboard') }}">Admin dashboard</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('menu.menu') }}">Menu</a>
                     </li>
+                    {% if current_user.is_authenticated and current_user.is_admin %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('home.about') }}">About</a>
+                        <a class="nav-link" href="{{ url_for('admin.admin_dashboard') }}">Admin dashboard</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('home.about') }}">About Us</a>
                     </li>
                     {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('auth.profile') }}">Profile</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout</a>
                     </li>
@@ -43,6 +48,7 @@
                     </li>
                     {% endif %}
                     <br>
+                    {% if not current_user.is_admin and current_user.is_authenticated %}
                     <li class="nav-item">
                         <a href="{{ url_for('cart.view_cart') }}">
                             <i class="fas fa-shopping-cart"></i>
@@ -52,6 +58,7 @@
                             {% endif %}
                         </a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

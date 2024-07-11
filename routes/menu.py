@@ -16,6 +16,7 @@ def menu():
     else:
         menu_items = MenuItem.query.all()
     categories = Category.query.all()
+    redirect(url_for("admin.admin_dashboard"))
     return render_template(
         "menu.html", menu_items=menu_items,
         categories=categories,
@@ -47,7 +48,7 @@ def new_menu_item():
         db.session.add(menu_item)
         db.session.commit()
         flash("Menu item has been created!", "success")
-        return redirect(url_for("menu.menu"))
+        return redirect(url_for("admin.admin_dashboard"))
     return render_template(
         "create_menu_item.html", title="New Menu Item", form=form
     )
@@ -75,7 +76,7 @@ def update_menu_item(item_id):
             menu_item.image = os.getenv("DEFAULT_IMAGE")
         db.session.commit()
         flash("Menu item has been updated!", "success")
-        return redirect(url_for("menu.menu"))  # Redirect to the menu page after update
+        return redirect(url_for("admin.admin_dashboard"))  # Redirect to the menu page after update
     elif request.method == "GET":
         # Populate the form fields with existing data
         form.name.data = menu_item.name
@@ -104,4 +105,4 @@ def delete_menu_item(item_id):
         return redirect(url_for('menu.menu'))  # Redirect to menu page after deletion
     else:
         flash('Failed to delete menu item.', 'error')
-        return redirect(url_for('menu.menu'))  # Redirect to menu page if not POST request
+        return redirect(url_for("admin.admin_dashboard"))  # Redirect to menu page if not POST request
