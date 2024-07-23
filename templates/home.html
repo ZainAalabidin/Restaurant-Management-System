@@ -19,14 +19,21 @@
         border-radius: 10px;
     }
 </style>
+<style>
+    .cover-image {
+        background: url("{{ url_for('static', filename='images/background.jpg') }}") no-repeat center center;
+        background-size: cover;
+    }
+</style>
 
-<div class="home-background">
-    <div class="jumbotron">
+<div class="cover-image h-screen flex items-center justify-center text-white">
+    <div class="text-center">
         <h1 class="display-4">Welcome to Yummy Restaurant!</h1>
         <p class="lead">Enjoy delicious meals with us.</p>
         <hr class="my-4">
         <p>Explore our menu and place your order.</p>
         <a class="btn btn-primary btn-lg" href="{{ url_for('menu.menu') }}" role="button">View Menu</a>
+	<br>
     </div>
 </div>
 {% endblock %}
