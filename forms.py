@@ -15,9 +15,10 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
     def validate_email(self, email):
+        # Custom validator to check if the email is already in use
         user = User.query.filter_by(email=email.data).first()
         if user:
-            raise ValidationError('That email is taken. please choose a different email.')
+            raise ValidationError('That email is taken. Please choose a different email.')
 
 # Define Login Form 
 class LoginForm(FlaskForm):
@@ -26,6 +27,7 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
+# Define Menu Item Form
 class MenuItemForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
@@ -35,14 +37,17 @@ class MenuItemForm(FlaskForm):
     submit = SubmitField('Save')
 
     def __init__(self, *args, **kwargs):
+        # Initialize the form and set the choices for the category field
         super(MenuItemForm, self).__init__(*args, **kwargs)
         self.category.choices = [(category.id, category.name) for category in Category.query.all()]
 
+# Define Order Form
 class OrderForm(FlaskForm):
-    user_id = StringField('User id', validators=[DataRequired()])
+    user_id = StringField('User ID', validators=[DataRequired()])
     table_number = IntegerField('Table Number', validators=[DataRequired()])
     submit = SubmitField('Create Order')
 
+# Define Update Profile Form
 class UpdateProfileForm(FlaskForm):
     username = StringField('Name', validators=[DataRequired(), Length(min=2, max=100)])
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -51,6 +56,7 @@ class UpdateProfileForm(FlaskForm):
     submit = SubmitField('Update')
 
     def validate_email(self, email):
+        # Custom validator to check if the email is already in use, excluding the current user's email
         if email.data != current_user.email:
             user = User.query.filter_by(email=email.data).first()
             if user:
