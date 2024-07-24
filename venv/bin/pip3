@@ -1,4 +1,4 @@
-#!/home/ubuntu/Restaurant-Management-System/venv/bin/python3
+#!/home/zain/Restaurant-Management-System/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
