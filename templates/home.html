@@ -2,24 +2,6 @@
 {% block title %}Home - Yummy Restaurant{% endblock %}
 {% block content %}
 <style>
-    .home-background {
-        background-image: url("{{ url_for('static', filename='images/background.jpg') }}");
-        background-size: cover;
-        background-position: center;
-        height: 100vh; /* Adjust height based on your design */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-
-    .jumbotron {
-        background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
-        padding: 30px;
-        border-radius: 10px;
-    }
-</style>
-<style>
     .cover-image {
         background: url("{{ url_for('static', filename='images/background.jpg') }}") no-repeat center center;
         background-size: cover;
