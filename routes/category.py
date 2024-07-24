@@ -3,8 +3,10 @@ from models import Category, OrderItem
 from flask_login import login_required
 from extensions import db
 
+# Create a blueprint for category-related routes
 category_bp = Blueprint('category', __name__)
 
+# Route to add a new category
 @category_bp.route("/add_category", methods=["GET", "POST"])
 def add_category():
     if request.method == "POST":
@@ -20,7 +22,8 @@ def add_category():
             flash("Category already exists.", "danger")
         return redirect(url_for("category.add_category"))
     return render_template("add_category.html")
-    
+
+# Route to delete a category
 @category_bp.route('/categories/<int:category_id>/delete', methods=['POST'])
 @login_required
 def delete_category(category_id):
