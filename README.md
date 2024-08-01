@@ -7,13 +7,10 @@ Welcome to **[Yummy Restaurant]**! This project is designed to place an order lo
 
 **Deployed Site:** [(http://52.3.245.27/home)]
 
-=======
+
 Welcome to **[Yummy Restaurant]**! This project is designed to [briefly describe the purpose of your project]. It includes features like [list key features] and aims to [state the main goal or problem it solves].
 
-**Deployed Site:** [[Link to Deployed Site](http://52.3.245.27/home)]
-
-**Final Project Blog Article:** [Link to Blog Article]
->>>>>>> 0951915c32a4c0f4c6e2d214817d9425c8924018
+**Deployed Site:** [(http://52.3.245.27/home)]
 
 **Author(s) LinkedIn:** [https://www.linkedin.com/in/zainalabidin9997/]
 
