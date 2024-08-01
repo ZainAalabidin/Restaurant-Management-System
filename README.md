@@ -2,7 +2,6 @@
 
 ## Introduction
 
-<<<<<<< HEAD
 Welcome to **[Yummy Restaurant]**! This project is designed to place an order locally by customers in the restaurant and manage the orders by admin. It includes features like show menu , select menu items, add items in the cart, and place order py table number,  and aims to help the customer to place order easiley.
 
 **Deployed Site:** [(http://52.3.245.27/home)]
